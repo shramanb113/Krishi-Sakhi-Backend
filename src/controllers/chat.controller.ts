@@ -1,4 +1,3 @@
-// src/controllers/chat.controller.ts
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { ChatService } from "../services/chat.service";
@@ -16,12 +15,17 @@ export class ChatController {
         throw new AppError(400, "User ID is required");
       }
 
+      if (!message || typeof message !== "string") {
+        throw new AppError(400, "Valid message is required");
+      }
+
       const response = await this.chatService.handle(userId, message);
 
       res.json({
         success: true,
         data: {
           reply: response,
+          userId,
           timestamp: new Date().toISOString(),
         },
       });
@@ -47,6 +51,7 @@ export class ChatController {
       res.json({
         success: true,
         message: "Chat history cleared successfully",
+        userId,
         timestamp: new Date().toISOString(),
       });
     } catch (error) {
@@ -55,6 +60,33 @@ export class ChatController {
       }
       console.error("Clear chat history error:", error);
       throw new AppError(500, "Failed to clear chat history");
+    }
+  }
+
+  async getChatHistory(req: Request, res: Response): Promise<void> {
+    try {
+      const userId = req.params.userId;
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
+
+      if (!userId) {
+        throw new AppError(400, "User ID is required");
+      }
+
+      const history = await this.chatService.getHistory(userId, limit);
+
+      res.json({
+        success: true,
+        data: history,
+        userId,
+        limit,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw error;
+      }
+      console.error("Get chat history error:", error);
+      throw new AppError(500, "Failed to fetch chat history");
     }
   }
 }

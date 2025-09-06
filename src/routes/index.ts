@@ -21,6 +21,7 @@ import {
   farmersSearchQuerySchema,
   searchQuerySchema,
 } from "../middlewares/validator";
+import z from "zod";
 
 const router = Router();
 const chatController = new ChatController();
@@ -99,6 +100,21 @@ router.delete(
   "/chat/:userId/history",
   validateParams(chatParamsSchema),
   chatController.clearChatHistory.bind(chatController)
+);
+router.get(
+  "/chat/:userId/history",
+  validateParams(chatParamsSchema),
+  validateQuery(
+    z.object({
+      limit: z
+        .string()
+        .regex(/^\d+$/)
+        .transform(Number)
+        .default("10")
+        .optional(),
+    })
+  ),
+  chatController.getChatHistory.bind(chatController)
 );
 
 // 404 handler for API routes

@@ -1,9 +1,11 @@
 import { Farmer } from "../domain/farmer";
 import { Activity } from "../domain/activity";
+import { Message } from "../domain/message";
 
 export interface IChatService {
   handle(userId: string, textMl: string): Promise<string>;
   clearHistory(userId: string): Promise<void>;
+  getHistory(userId: string, limit?: number): Promise<Message[]>;
 }
 
 export interface IFarmerService {

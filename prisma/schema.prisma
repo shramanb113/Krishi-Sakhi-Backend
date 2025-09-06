@@ -1,3 +1,4 @@
+// prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
 }
@@ -21,15 +22,21 @@ model Farmer {
   irrigation       String?
   language         String   @default("ml")
   createdAt        DateTime @default(now())
-}
+  updatedAt        DateTime @updatedAt
 
+  @@map("farmers")
+}
 
 model Activity {
   id        String   @id @default(uuid())
   farmerId  String
-  type      String   // e.g., sowing, irrigation, pest
+  type      String   // e.g., sowing, irrigation, pest, harvest
   details   String
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("activities")
+  @@index([farmerId])
 }
 
 model Message {
@@ -38,6 +45,9 @@ model Message {
   role      String   // 'user' | 'assistant'
   content   String
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@index([userId, createdAt])
+  @@map("messages")
+  @@index([userId])
+  @@index([createdAt])
 }

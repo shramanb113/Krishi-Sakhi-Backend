@@ -2,10 +2,19 @@ import { injectable, inject } from "tsyringe";
 import { ChatRepository } from "../repositories/chat.repository";
 import { openai } from "../infra/openaiClient";
 import { translateMlToEn, translateEnToMl } from "../infra/hfTranslator";
-import { KERALA_SYSTEM_PROMPT, FEW_SHOT_EXAMPLES } from "../utils/prompt";
+import {
+  KERALA_SYSTEM_PROMPT,
+  FEW_SHOT_EXAMPLES,
+  FewShotExample,
+} from "../utils/prompt";
 import { AppError } from "../middlewares/errorHandler";
 import { IChatService } from "./interface";
 import { Message } from "../domain/message";
+import {
+  createOpenAIMessage,
+  createMessagesFromHistory,
+  OpenAIMessage,
+} from "../utils/openaiHelper";
 
 @injectable()
 export class ChatService implements IChatService {
@@ -16,6 +25,19 @@ export class ChatService implements IChatService {
 
   async handle(userId: string, textMl: string): Promise<string> {
     try {
+      // Input validation
+      if (!userId || typeof userId !== "string") {
+        throw new AppError(400, "Valid user ID is required");
+      }
+
+      if (!textMl || typeof textMl !== "string" || textMl.trim().length === 0) {
+        throw new AppError(400, "Valid message is required");
+      }
+
+      if (textMl.length > 1000) {
+        throw new AppError(400, "Message too long (max 1000 characters)");
+      }
+
       // Malayalam -> English translation
       let textEn = textMl;
       let shouldTranslate = this.isMalayalam(textMl);
@@ -31,15 +53,18 @@ export class ChatService implements IChatService {
       // Load conversation history
       const history = await this.repo.getHistory(userId, 8);
 
-      // Construct messages for OpenAI
-      const messages = [
-        { role: "system", content: KERALA_SYSTEM_PROMPT },
-        ...FEW_SHOT_EXAMPLES.flatMap((ex) => [
-          { role: "user", content: ex.user },
-          { role: "assistant", content: ex.assistant },
+      // Create properly typed OpenAI messages using OpenAI's exact types
+      const messages: OpenAIMessage[] = [
+        createOpenAIMessage("system", KERALA_SYSTEM_PROMPT),
+        // Add few-shot examples
+        ...FEW_SHOT_EXAMPLES.flatMap((ex: FewShotExample) => [
+          createOpenAIMessage("user", ex.user),
+          createOpenAIMessage("assistant", ex.assistant),
         ]),
-        ...history.map((m) => ({ role: m.role, content: m.content })),
-        { role: "user", content: textEn },
+        // Add conversation history
+        ...createMessagesFromHistory(history),
+        // Add current message
+        createOpenAIMessage("user", textEn),
       ];
 
       console.log("Sending to OpenAI:", {
@@ -47,10 +72,10 @@ export class ChatService implements IChatService {
         messageCount: messages.length,
       });
 
-      // Call OpenAI API
+      // Call OpenAI API - now perfectly typed!
       const resp = await openai.chat.completions.create({
         model: "gpt-4o-mini",
-        messages,
+        messages, // No type errors now!
         temperature: 0.2,
         max_tokens: 500,
       });
@@ -74,6 +99,10 @@ export class ChatService implements IChatService {
       return assistantEn;
     } catch (error) {
       console.error("Chat service error:", error);
+
+      if (error instanceof AppError) {
+        throw error;
+      }
 
       if (error instanceof Error) {
         throw new AppError(500, `Chat processing failed: ${error.message}`);
@@ -103,7 +132,6 @@ export class ChatService implements IChatService {
   }
 
   private isMalayalam(text: string): boolean {
-    // Check for Malayalam Unicode range (approximately U+0D00 to U+0D7F)
     return /[\u0D00-\u0D7F]/.test(text);
   }
 }

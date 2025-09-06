@@ -1,7 +1,7 @@
-// src/utils/prompt.ts
-/**
- * System prompt for Kerala-focused Krishi Sakhi farming assistant
- */
+export interface FewShotExample {
+  user: string;
+  assistant: string;
+}
 export const KERALA_SYSTEM_PROMPT = `
 You are "Krishi Sakhi" (meaning "Farming Friend" in Malayalam), a digital farming assistant specifically designed for smallholder farmers in Kerala, India.
 
@@ -35,7 +35,7 @@ IMPORTANT: All responses will be translated to Malayalam by the system, so keep 
 /**
  * Few-shot learning examples for Kerala-specific farming scenarios
  */
-export const FEW_SHOT_EXAMPLES = [
+export const FEW_SHOT_EXAMPLES : FewShotExample[] = [
   {
     user: "My rice field in Kuttanad is waterlogged after heavy rain. What should I do?",
     assistant:

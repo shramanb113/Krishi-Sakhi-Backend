@@ -1,15 +1,15 @@
-import { injectable, inject } from "tsyringe";
-import { FarmerRepository } from "../repositories/farmer.repository";
-import { Farmer } from "../domain/farmer";
-import { AppError } from "../middlewares/errorHandler";
-import { IFarmerService } from "./interface";
-import { generateFarmerId } from "@/utils/farmerIdGenerator";
+import { injectable, inject } from 'tsyringe';
+import { FarmerRepository } from '../repositories/farmer.repository';
+import { Farmer } from '../domain/farmer';
+import { AppError } from '../middlewares/errorHandler';
+import { IFarmerService } from './interface';
+import { generateFarmerId } from '@/utils/farmerIdGenerator';
 
 interface GetAllOptions {
   page: number;
   limit: number;
   sortBy?: string;
-  sortOrder?: "asc" | "desc";
+  sortOrder?: 'asc' | 'desc';
   filters?: {
     village?: string;
     crop?: string;
@@ -25,25 +25,17 @@ export class FarmerService implements IFarmerService {
   ) {}
 
   async create(
-    farmer: Omit<Farmer, "id" | "createdAt" | "updatedAt">
+    farmer: Omit<Farmer, 'id' | 'farmerId' | 'createdAt' | 'updatedAt'>
   ): Promise<Farmer> {
     try {
-      const existing = await this.repo.findByFarmerId(farmer.farmerId);
-      if (existing) {
-        throw new AppError(
-          409,
-          `Farmer with ID ${farmer.farmerId} already exists`
-        );
-      }
-      const farmerId = await generateFarmerId(); // ← Use the utility function
-
+      const farmerId = await generateFarmerId();
       return await this.repo.create({ ...farmer, farmerId });
     } catch (error) {
       if (error instanceof AppError) {
         throw error;
       }
-      console.error("Failed to create farmer:", error);
-      throw new AppError(500, "Failed to create farmer");
+      console.error('Failed to create farmer - Details:', error);
+      throw new AppError(500, 'Failed to create farmer');
     }
   }
 
@@ -51,14 +43,14 @@ export class FarmerService implements IFarmerService {
     try {
       return await this.repo.findByFarmerId(farmerId);
     } catch (error) {
-      console.error("Failed to fetch farmer:", error);
-      throw new AppError(500, "Failed to fetch farmer");
+      console.error('Failed to fetch farmer:', error);
+      throw new AppError(500, 'Failed to fetch farmer');
     }
   }
 
   async update(
     farmerId: string,
-    data: Partial<Omit<Farmer, "id" | "farmerId" | "createdAt" | "updatedAt">>
+    data: Partial<Omit<Farmer, 'id' | 'farmerId' | 'createdAt' | 'updatedAt'>>
   ): Promise<Farmer> {
     try {
       const existing = await this.repo.findByFarmerId(farmerId);
@@ -71,8 +63,8 @@ export class FarmerService implements IFarmerService {
       if (error instanceof AppError) {
         throw error;
       }
-      console.error("Failed to update farmer:", error);
-      throw new AppError(500, "Failed to update farmer");
+      console.error('Failed to update farmer:', error);
+      throw new AppError(500, 'Failed to update farmer');
     }
   }
 
@@ -88,8 +80,8 @@ export class FarmerService implements IFarmerService {
       if (error instanceof AppError) {
         throw error;
       }
-      console.error("Failed to delete farmer:", error);
-      throw new AppError(500, "Failed to delete farmer");
+      console.error('Failed to delete farmer:', error);
+      throw new AppError(500, 'Failed to delete farmer');
     }
   }
 
@@ -100,8 +92,8 @@ export class FarmerService implements IFarmerService {
       }
       return await this.repo.findAll();
     } catch (error) {
-      console.error("Failed to fetch farmers:", error);
-      throw new AppError(500, "Failed to fetch farmers");
+      console.error('Failed to fetch farmers:', error);
+      throw new AppError(500, 'Failed to fetch farmers');
     }
   }
 
@@ -109,8 +101,8 @@ export class FarmerService implements IFarmerService {
     try {
       return await this.repo.search(query, limit);
     } catch (error) {
-      console.error("Search farmers error:", error);
-      throw new AppError(500, "Failed to search farmers");
+      console.error('Search farmers error:', error);
+      throw new AppError(500, 'Failed to search farmers');
     }
   }
 }

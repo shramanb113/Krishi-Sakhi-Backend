@@ -1,10 +1,10 @@
-import { Activity } from "../domain/activity";
-import { Farmer } from "../domain/farmer";
-import { Message } from "../domain/message";
+import { Activity } from '../domain/activity';
+import { Farmer } from '../domain/farmer';
+import { Message } from '../domain/message';
 
 export interface IActivityService {
   log(
-    activity: Omit<Activity, "id" | "createdAt" | "updatedAt">
+    activity: Omit<Activity, 'id' | 'farmerId' | 'createdAt' | 'updatedAt'>
   ): Promise<Activity>;
   getByFarmer(farmerId: string): Promise<Activity[]>;
   getRecent(limit?: number): Promise<Activity[]>;
@@ -19,12 +19,12 @@ export interface IActivityService {
 
 export interface IFarmerService {
   create(
-    farmer: Omit<Farmer, "id" | "createdAt" | "updatedAt">
+    farmer: Omit<Farmer, 'id' | 'createdAt' | 'updatedAt'>
   ): Promise<Farmer>;
   get(farmerId: string): Promise<Farmer | null>;
   update(
     farmerId: string,
-    data: Partial<Omit<Farmer, "id" | "farmerId" | "createdAt" | "updatedAt">>
+    data: Partial<Omit<Farmer, 'id' | 'farmerId' | 'createdAt' | 'updatedAt'>>
   ): Promise<Farmer>;
   delete(farmerId: string): Promise<void>;
   getAll(): Promise<Farmer[]>;

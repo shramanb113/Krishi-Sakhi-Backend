@@ -1,9 +1,8 @@
-// src/server.ts
 import "reflect-metadata";
 import "./config/env";
-import app from "./app";
-import { prisma, disconnectPrisma } from "./infra/prismaClient";
-import { ENV } from "./config/env";
+import app from "./app.js";
+import { prisma, disconnectPrisma } from "./infra/prismaClient.js";
+import { ENV } from "./config/env.js";
 
 const PORT = ENV.PORT || 3000;
 

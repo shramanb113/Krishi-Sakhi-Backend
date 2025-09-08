@@ -1,18 +1,81 @@
+// src/infra/hfTranslator.ts
 import axios from "axios";
 import { ENV } from "../config/env";
 import { AppError } from "../middlewares/errorHandler";
 
-const HF_BASE = "https://api-inference.huggingface.co/models";
+const HF_INFERENCE_API = "https://api-inference.huggingface.co/models";
 const TIMEOUT = 30000;
 
-interface HFTranslationResponse {
-  translation_text: string;
-}
+const RATE_LIMIT_CONFIG = {
+  MAX_REQUESTS_PER_MINUTE: 60,
+  MIN_TIME_BETWEEN_REQUESTS: 1000,
 
-async function callHF(
+  // Internal queue to manage rate limiting
+  requestQueue: [] as Array<{
+    resolve: (value: any) => void;
+    reject: (error: any) => void;
+    modelId: string;
+    text: string;
+  }>,
+  isProcessing: false,
+  lastRequestTime: 0,
+};
+
+async function callHFInferenceAPI(
   modelId: string,
   text: string,
-  maxRetries: number = 2
+  maxRetries: number = 3
+): Promise<any> {
+  return new Promise((resolve, reject) => {
+    // Add request to queue
+    RATE_LIMIT_CONFIG.requestQueue.push({ resolve, reject, modelId, text });
+
+    // Process queue if not already processing
+    if (!RATE_LIMIT_CONFIG.isProcessing) {
+      processRequestQueue();
+    }
+  });
+}
+
+async function processRequestQueue(): Promise<void> {
+  if (RATE_LIMIT_CONFIG.requestQueue.length === 0) {
+    RATE_LIMIT_CONFIG.isProcessing = false;
+    return;
+  }
+
+  RATE_LIMIT_CONFIG.isProcessing = true;
+
+  const now = Date.now();
+  const timeSinceLastRequest = now - RATE_LIMIT_CONFIG.lastRequestTime;
+  const timeToWait = Math.max(
+    0,
+    RATE_LIMIT_CONFIG.MIN_TIME_BETWEEN_REQUESTS - timeSinceLastRequest
+  );
+
+  await new Promise((resolve) => setTimeout(resolve, timeToWait));
+
+  const request = RATE_LIMIT_CONFIG.requestQueue.shift();
+  if (!request) {
+    RATE_LIMIT_CONFIG.isProcessing = false;
+    return;
+  }
+
+  RATE_LIMIT_CONFIG.lastRequestTime = Date.now();
+
+  try {
+    const result = await makeHFAPIRequest(request.modelId, request.text);
+    request.resolve(result);
+  } catch (error) {
+    request.reject(error);
+  }
+
+  setTimeout(processRequestQueue, RATE_LIMIT_CONFIG.MIN_TIME_BETWEEN_REQUESTS);
+}
+
+async function makeHFAPIRequest(
+  modelId: string,
+  text: string,
+  maxRetries: number = 3
 ): Promise<any> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
@@ -26,23 +89,23 @@ async function callHF(
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      const resp = await axios.post(
-        `${HF_BASE}/${modelId}`,
+      const response = await axios.post(
+        `${HF_INFERENCE_API}/${modelId}`,
         { inputs: text },
         {
           headers,
           timeout: TIMEOUT,
-          validateStatus: (status) => status < 500, // Don't throw for 4xx errors
+          validateStatus: (status) => status < 500,
         }
       );
 
-      if (resp.status === 200) {
-        return resp.data;
+      if (response.status === 200) {
+        return response.data;
       }
 
-      if (resp.status === 503) {
-        // Model loading - retry after delay
-        const delay = 2000 * attempt;
+      if (response.status === 503) {
+        const retryAfter = response.headers["retry-after"] || 10;
+        const delay = parseInt(retryAfter) * 1000;
         console.warn(
           `Model ${modelId} is loading. Retrying in ${delay}ms (attempt ${attempt}/${maxRetries})`
         );
@@ -50,20 +113,24 @@ async function callHF(
         continue;
       }
 
-      throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
+      if (response.status === 429) {
+        const retryAfter = response.headers["retry-after"] || 30;
+        const delay = parseInt(retryAfter) * 1000;
+        console.warn(
+          `Rate limited by API. Retrying in ${delay}ms (attempt ${attempt}/${maxRetries})`
+        );
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        continue;
+      }
+
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     } catch (error: any) {
       lastError = error;
 
       if (error.code === "ECONNABORTED") {
+        const delay = 2000 * attempt;
         console.warn(
-          `Timeout for ${modelId}. Retrying (attempt ${attempt}/${maxRetries})`
-        );
-        await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
-      } else if (error.response?.status === 429) {
-        // Rate limit - exponential backoff
-        const delay = 1000 * Math.pow(2, attempt - 1);
-        console.warn(
-          `Rate limited. Retrying in ${delay}ms (attempt ${attempt}/${maxRetries})`
+          `Timeout. Retrying in ${delay}ms (attempt ${attempt}/${maxRetries})`
         );
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
@@ -72,62 +139,75 @@ async function callHF(
     }
   }
 
-  throw new AppError(
-    500,
-    `Hugging Face API failed for ${modelId}: ${lastError?.message}`
-  );
+  throw new AppError(500, `Hugging Face API failed: ${lastError?.message}`);
+}
+
+const translationCache = new Map<string, string>();
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour cache
+
+function getCacheKey(modelId: string, text: string): string {
+  return `${modelId}:${text}`;
 }
 
 export async function translateMlToEn(text: string): Promise<string> {
+  const cacheKey = getCacheKey("ml-en", text);
+
+  if (translationCache.has(cacheKey)) {
+    return translationCache.get(cacheKey)!;
+  }
+
   try {
-    const out = await callHF("Helsinki-NLP/opus-mt-ml-en", text);
+    const result = await callHFInferenceAPI("Helsinki-NLP/opus-mt-ml-en", text);
+    const translation = extractTranslation(result);
 
-    if (Array.isArray(out) && out[0]?.translation_text) {
-      return out[0].translation_text;
-    }
+    // Cache the result
+    translationCache.set(cacheKey, translation);
+    setTimeout(() => translationCache.delete(cacheKey), CACHE_TTL);
 
-    if (typeof out === "object" && out.translation_text) {
-      return out.translation_text;
-    }
-
-    return String(out);
+    return translation;
   } catch (error) {
     console.warn(
       "Malayalam to English translation failed, using original text"
     );
-    return text; // Fallback to original text
+    return text;
   }
 }
 
 export async function translateEnToMl(text: string): Promise<string> {
+  const cacheKey = getCacheKey("en-ml", text);
+
+  if (translationCache.has(cacheKey)) {
+    return translationCache.get(cacheKey)!;
+  }
+
   try {
-    const out = await callHF("Helsinki-NLP/opus-mt-en-ml", text);
+    const result = await callHFInferenceAPI("Helsinki-NLP/opus-mt-en-ml", text);
+    const translation = extractTranslation(result);
 
-    if (Array.isArray(out) && out[0]?.translation_text) {
-      return out[0].translation_text;
-    }
+    translationCache.set(cacheKey, translation);
+    setTimeout(() => translationCache.delete(cacheKey), CACHE_TTL);
 
-    if (typeof out === "object" && out.translation_text) {
-      return out.translation_text;
-    }
-
-    return String(out);
+    return translation;
   } catch (error) {
     console.warn(
       "English to Malayalam translation failed, using original text"
     );
-    return text; // Fallback to original text
+    return text;
   }
 }
 
-// Health check for Hugging Face
-export async function checkHFHealth(): Promise<boolean> {
-  try {
-    // Test with a simple translation
-    const result = await translateEnToMl("hello");
-    return result !== "hello"; // If it changed, service is working
-  } catch (error) {
-    console.error("Hugging Face health check failed:", error);
-    return false;
+function extractTranslation(result: any): string {
+  if (Array.isArray(result) && result[0]?.translation_text) {
+    return result[0].translation_text;
   }
+
+  if (typeof result === "object" && result.translation_text) {
+    return result.translation_text;
+  }
+
+  if (typeof result === "string") {
+    return result;
+  }
+
+  return String(result);
 }

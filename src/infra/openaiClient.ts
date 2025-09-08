@@ -2,9 +2,6 @@ import OpenAI from "openai";
 import { ENV } from "../config/env";
 import { AppError } from "../middlewares/errorHandler";
 
-/**
- * OpenAI client for chat reasoning with enhanced error handling
- */
 export const openai = new OpenAI({
   apiKey: ENV.OPENAI_API_KEY,
 });

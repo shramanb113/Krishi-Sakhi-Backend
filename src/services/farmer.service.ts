@@ -28,7 +28,7 @@ export class FarmerService implements IFarmerService {
   ): Promise<Farmer> {
     try {
       // Check if farmer already exists
-      const existing = await this.repo.getById(farmer.farmerId);
+      const existing = await this.repo.findByFarmerId(farmer.farmerId);
       if (existing) {
         throw new AppError(
           409,
@@ -48,7 +48,7 @@ export class FarmerService implements IFarmerService {
 
   async get(farmerId: string): Promise<Farmer | null> {
     try {
-      return await this.repo.getById(farmerId);
+      return await this.repo.findByFarmerId(farmerId);
     } catch (error) {
       console.error("Failed to fetch farmer:", error);
       throw new AppError(500, "Failed to fetch farmer");
@@ -60,7 +60,7 @@ export class FarmerService implements IFarmerService {
     data: Partial<Omit<Farmer, "id" | "farmerId" | "createdAt" | "updatedAt">>
   ): Promise<Farmer> {
     try {
-      const existing = await this.repo.getById(farmerId);
+      const existing = await this.repo.findByFarmerId(farmerId);
       if (!existing) {
         throw new AppError(404, `Farmer with ID ${farmerId} not found`);
       }
@@ -77,7 +77,7 @@ export class FarmerService implements IFarmerService {
 
   async delete(farmerId: string): Promise<void> {
     try {
-      const existing = await this.repo.getById(farmerId);
+      const existing = await this.repo.findByFarmerId(farmerId);
       if (!existing) {
         throw new AppError(404, `Farmer with ID ${farmerId} not found`);
       }
@@ -97,7 +97,7 @@ export class FarmerService implements IFarmerService {
       if (options) {
         return await this.repo.getPaginated(options);
       }
-      return await this.repo.getAll();
+      return await this.repo.findAll();
     } catch (error) {
       console.error("Failed to fetch farmers:", error);
       throw new AppError(500, "Failed to fetch farmers");

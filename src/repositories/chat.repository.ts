@@ -1,9 +1,11 @@
+// src/repositories/chat.repository.ts
 import { injectable } from "tsyringe";
 import { prisma } from "../infra/prismaClient";
 import { Message } from "../domain/message";
+import { IChatRepository } from "./interface";
 
 @injectable()
-export class ChatRepository {
+export class ChatRepository implements IChatRepository {
   async save(
     userId: string,
     role: "user" | "assistant",
@@ -13,14 +15,13 @@ export class ChatRepository {
       await prisma.message.create({
         data: { userId, role, content },
       });
-      console.log(`Saved message for user ${userId}, role: ${role}`);
     } catch (error) {
       console.error("Failed to save message:", error);
       throw new Error("Failed to save chat message");
     }
   }
 
-  async getHistory(userId: string, limit: number = 10): Promise<Message[]> {
+  async findHistory(userId: string, limit: number = 10): Promise<Message[]> {
     try {
       const rows = await prisma.message.findMany({
         where: { userId },
@@ -44,14 +45,13 @@ export class ChatRepository {
       await prisma.message.deleteMany({
         where: { userId },
       });
-      console.log(`Cleared all messages for user: ${userId}`);
     } catch (error) {
       console.error("Failed to clear chat history:", error);
       throw new Error("Failed to clear chat history");
     }
   }
 
-  async getRecentMessages(limit: number = 20): Promise<Message[]> {
+  async findRecentMessages(limit: number = 20): Promise<Message[]> {
     try {
       const rows = await prisma.message.findMany({
         orderBy: { createdAt: "desc" },
@@ -72,7 +72,7 @@ export class ChatRepository {
     }
   }
 
-  async getMessageCount(userId: string): Promise<number> {
+  async countMessages(userId: string): Promise<number> {
     try {
       return await prisma.message.count({
         where: { userId },

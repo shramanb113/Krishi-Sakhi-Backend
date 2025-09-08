@@ -51,7 +51,7 @@ export class ChatService implements IChatService {
       await this.repo.save(userId, "user", textEn);
 
       // Load conversation history
-      const history = await this.repo.getHistory(userId, 8);
+      const history = await this.repo.findHistory(userId, 8);
 
       // Create properly typed OpenAI messages using OpenAI's exact types
       const messages: OpenAIMessage[] = [
@@ -124,7 +124,7 @@ export class ChatService implements IChatService {
 
   async getHistory(userId: string, limit: number = 10): Promise<Message[]> {
     try {
-      return await this.repo.getHistory(userId, limit);
+      return await this.repo.findHistory(userId, limit);
     } catch (error) {
       console.error("Failed to get chat history:", error);
       throw new AppError(500, "Failed to fetch chat history");

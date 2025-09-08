@@ -20,6 +20,7 @@ import {
   farmersListQuerySchema,
   farmersSearchQuerySchema,
   searchQuerySchema,
+  typeParamsSchema,
 } from "../middlewares/validator";
 import z from "zod";
 
@@ -70,23 +71,26 @@ router.delete(
 router.post(
   "/activities",
   validateRequest(activitySchema),
-  activityController.logActivity.bind(activityController)
+  activityController.createActivity.bind(activityController)
 );
 router.get(
   "/activities/farmer/:farmerId",
   validateParams(farmerParamsSchema),
-  validateQuery(activitiesQuerySchema),
-  activityController.getFarmerActivities.bind(activityController)
+  activityController.getActivitiesByFarmerId.bind(activityController)
 );
 router.get(
   "/activities",
-  validateQuery(activitiesQuerySchema),
   activityController.getRecentActivities.bind(activityController)
 );
 router.delete(
   "/activities/:activityId",
   validateParams(activityParamsSchema),
   activityController.deleteActivity.bind(activityController)
+);
+router.get(
+  "/activities/farmer/:farmerId/type/:type",
+  validateParams(typeParamsSchema),
+  activityController.getActivitiesByType.bind(activityController)
 );
 
 // Chat routes

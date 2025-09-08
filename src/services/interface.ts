@@ -1,11 +1,20 @@
-import { Farmer } from "../domain/farmer";
 import { Activity } from "../domain/activity";
+import { Farmer } from "../domain/farmer";
 import { Message } from "../domain/message";
 
-export interface IChatService {
-  handle(userId: string, textMl: string): Promise<string>;
-  clearHistory(userId: string): Promise<void>;
-  getHistory(userId: string, limit?: number): Promise<Message[]>;
+export interface IActivityService {
+  log(
+    activity: Omit<Activity, "id" | "createdAt" | "updatedAt">
+  ): Promise<Activity>;
+  getByFarmer(farmerId: string): Promise<Activity[]>;
+  getRecent(limit?: number): Promise<Activity[]>;
+  delete(activityId: string): Promise<void>;
+  getByType(farmerId: string, type: string): Promise<Activity[]>;
+  getByDateRange(
+    farmerId: string,
+    startDate: Date,
+    endDate: Date
+  ): Promise<Activity[]>;
 }
 
 export interface IFarmerService {
@@ -18,25 +27,12 @@ export interface IFarmerService {
     data: Partial<Omit<Farmer, "id" | "farmerId" | "createdAt" | "updatedAt">>
   ): Promise<Farmer>;
   delete(farmerId: string): Promise<void>;
-  getAll(options?: {
-    page: number;
-    limit: number;
-    sortBy?: string;
-    sortOrder?: "asc" | "desc";
-    filters?: {
-      village?: string;
-      crop?: string;
-      soilType?: string;
-    };
-  }): Promise<Farmer[]>;
+  getAll(): Promise<Farmer[]>;
   search(query: string, limit?: number): Promise<Farmer[]>;
 }
 
-export interface IActivityService {
-  log(
-    activity: Omit<Activity, "id" | "createdAt" | "updatedAt">
-  ): Promise<Activity>;
-  getByFarmer(farmerId: string): Promise<Activity[]>;
-  getRecent(limit?: number): Promise<Activity[]>;
-  delete(activityId: string): Promise<void>;
+export interface IChatService {
+  handle(userId: string, textMl: string): Promise<string>;
+  clearHistory(userId: string): Promise<void>;
+  getHistory(userId: string, limit?: number): Promise<Message[]>;
 }

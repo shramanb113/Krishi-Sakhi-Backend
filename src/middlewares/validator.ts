@@ -106,6 +106,11 @@ export const activityParamsSchema = z.object({
   activityId: z.string().uuid("Invalid activity ID"),
 });
 
+export const typeParamsSchema = z.object({
+  farmerId: z.string().min(1, "Farmer ID is required"),
+  type: z.string().min(1, "Type is required"),
+});
+
 export const chatParamsSchema = z.object({
   userId: z.string().min(1, "User ID is required"),
 });

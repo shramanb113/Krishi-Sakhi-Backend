@@ -35,7 +35,7 @@ IMPORTANT: All responses will be translated to Malayalam by the system, so keep 
 /**
  * Few-shot learning examples for Kerala-specific farming scenarios
  */
-export const FEW_SHOT_EXAMPLES : FewShotExample[] = [
+export const FEW_SHOT_EXAMPLES: FewShotExample[] = [
   {
     user: "My rice field in Kuttanad is waterlogged after heavy rain. What should I do?",
     assistant:
@@ -165,484 +165,480 @@ export const FEW_SHOT_EXAMPLES : FewShotExample[] = [
     user: "What should I do before planting yam in Kollam?",
     assistant:
       "Yam needs deep, loose soil and good nutrition.\n\n1. Dig pits (60x60x60cm), fill with compost and sand mix\n2. Use healthy tuber pieces (300–500g)\n3. Apply neem cake to pits before planting\n4. Support with bamboo stakes for vines\n5. Water weekly until monsoon starts\n6. Harvest in 8–10 months after planting",
-  }
-
-
-
+  },
   {
-    question:
-      "How can I control banana weevil (Odoiporus longicollis) in my plantation without chemicals?",
-    answer:
+    user: "How can I control banana weevil (Odoiporus longicollis) in my plantation without chemicals?",
+    assistant:
       "Regularly remove and destroy weevil-infested pseudostems and corms. Use pheromone traps by placing rolled banana leaves with weevil pheromone near plants. Introduce beneficial nematodes (Steinernema spp.) in the soil. Maintain good field hygiene and avoid leaving residues that harbor pests.",
   },
   {
-    question:
-      "Which rice variety is best suited for low-lying paddy fields prone to flooding during monsoon in Kerala?",
-    answer:
+    user: "Which rice variety is best suited for low-lying paddy fields prone to flooding during monsoon in Kerala?",
+    assistant:
       "Cultivate ‘Jyothi’ or ‘Uma’, which are submergence-tolerant. Use direct-seeded rice method for better establishment. Raise seedlings in nursery beds, then transplant at 25 cm x 25 cm spacing. Apply green leaf manure to enhance soil organic carbon.",
   },
   {
-    question:
-      "How do I schedule irrigation for vegetables during the dry season in Kollam?",
-    answer:
+    user: "How do I schedule irrigation for vegetables during the dry season in Kollam?",
+    assistant:
       "Water early in the morning and late afternoon to reduce evaporation. Use drip irrigation or water channels to supply 2–3 l per plant per day. Mulch with straw or dried palm fronds to conserve moisture. Monitor soil moisture by feeling the soil at 5 cm depth—if it’s dry, irrigate.",
   },
   {
-    question:
-      "What natural methods can I use to improve sandy soil in Kasaragod?",
-    answer:
+    user: "What natural methods can I use to improve sandy soil in Kasaragod?",
+    assistant:
       "Incorporate well-decomposed compost or farmyard manure at least 10 t/ha. Add green manure crops like sunn hemp or sesbania and plough them in before flowering. Apply rice husk or coir pith to increase water retention. Use biofertilisers such as Azospirillum and phosphate-solubilizing bacteria.",
   },
   {
-    question:
-      "How can I protect my pepper vines from Phytophthora foot rot during the monsoon?",
-    answer:
+    user: "How can I protect my pepper vines from Phytophthora foot rot during the monsoon?",
+    assistant:
       "Ensure proper drainage around vines; create raised beds. Apply neem cake or Trichoderma viride at 2 kg/vine base every 3 months. Use Bordeaux mixture spray (1%) in early monsoon. Avoid waterlogging by weeding and mulching with coconut husk.",
   },
   {
-    question:
-      "When should I apply lime to acid soils in Wayanad tea plantations?",
-    answer:
+    user: "When should I apply lime to acid soils in Wayanad tea plantations?",
+    assistant:
       "Test soil pH; if below 4.8, apply fine calcitic lime at 1 t/ha before the monsoon. Broadcast evenly and incorporate into topsoil, then irrigate lightly to activate. Recheck soil pH after 6 months and reapply if still below 5. Naming soil improvement to support better nutrient uptake.",
   },
   {
-    question: "How can I control stem borer in maize organically?",
-    answer:
+    user: "How can I control stem borer in maize organically?",
+    assistant:
       "Inspect plants weekly and remove egg masses. Release Trichogramma chilonis locally. Install light traps to catch adults. Intercrop with sesame or apply neem oil (5%) spray during early infestations. Maintain field sanitation by destroying stubbles post-harvest.",
   },
   {
-    question:
-      "Which cover crops help improve soil fertility in rubber plantations in Thrissur?",
-    answer:
+    user: "Which cover crops help improve soil fertility in rubber plantations in Thrissur?",
+    assistant:
       "Grow legumes like sunn hemp, cowpea, and groundnut between rubber rows. Sow during monsoon, and incorporate them as green manure before flowering—it adds nitrogen and improves soil structure.",
   },
   {
-    question:
-      "How do I prepare for unpredictable monsoon rains when planting vegetable seedlings?",
-    answer:
+    user: "How do I prepare for unpredictable monsoon rains when planting vegetable seedlings?",
+    assistant:
       "Raise seedlings in shade-protected trays with well-drained media. Harden off seedlings by gradually exposing them to rain over 3–5 days. Install rain shelters or temporary plastic covers. Monitor weather alerts via local agri services and adjust transplanting schedules accordingly.",
   },
   {
-    question:
-      "What is the best way to manage root-knot nematodes in tapioca fields without chemicals?",
-    answer:
+    user: "What is the best way to manage root-knot nematodes in tapioca fields without chemicals?",
+    assistant:
       "Practice crop rotation with marigold or cowpea. Apply neem cake (1 t/ha) to the soil during land preparation. Use Trichoderma harzianum biofungicide. Solarize soil by covering with transparent plastic sheets during dry, sunny months for 4–6 weeks.",
   },
   {
-    question:
-      "How can I conserve soil moisture in dry coconut groves during summer?",
-    answer:
+    user: "How can I conserve soil moisture in dry coconut groves during summer?",
+    assistant:
       "Apply 10 cm of mulch—coir pith or dry leaves—around each palm. Use basin irrigation to concentrate water. Apply 100 g neem seed kernel powder at the basin. Cover trenches with mulch to minimize evaporation and gradually release moisture.",
   },
   {
-    question:
-      "Which fodder crops grow well under irrigated conditions in central Kerala?",
-    answer:
+    user: "Which fodder crops grow well under irrigated conditions in central Kerala?",
+    assistant:
       "Plant Napier grass, guinea grass, or desmanthus. Sow in 2–meter strips or around field perimeters. Provide irrigation 2–3 times a week, fertilise with FYM at 20 t/ha, and cut at 60 cm height for regrowth.",
   },
   {
-    question:
-      "How do I use drip irrigation efficiently for tomato cultivation in Palakkad?",
-    answer:
+    user: "How do I use drip irrigation efficiently for tomato cultivation in Palakkad?",
+    assistant:
       "Install drip laterals with 30 cm emitter spacing. Start with 1 l/hour emitters. Irrigate daily for two weeks after transplanting, then every alternate day. Monitor soil moisture manually or using tensiometers to adjust frequency.",
   },
   {
-    question:
-      "Which indigenous methods help repel leaf-eating caterpillars in okra and brinjal?",
-    answer:
+    user: "Which indigenous methods help repel leaf-eating caterpillars in okra and brinjal?",
+    assistant:
       "Spray a garlic–chili infusion (crush 20 garlic cloves + 10 chilies in 10 l water, ferment 24 h, strain and add 20 ml soap) every 5–7 days. Use eggplant stem traps and collect caterpillars manually. Encourage yellow sticky traps near plants.",
   },
   {
-    question: "How can I increase organic matter in clay soils of Kottayam?",
-    answer:
+    user: "How can I increase organic matter in clay soils of Kottayam?",
+    assistant:
       "Apply compost or farmyard manure at 15 t/ha annually. Grow green manure such as sunn hemp or sesbania between seasons and plough them in. Use vermicompost in planting holes (500 g per pit) for each fruit plant.",
   },
   {
-    question:
-      "How to time fertiliser application for maize under rainfed conditions in Idukki?",
-    answer:
+    user: "How to time fertiliser application for maize under rainfed conditions in Idukki?",
+    assistant:
       "Apply half of urea and single super phosphate at planting. Apply remaining urea in 2 split doses—one at 30 days and one at 60 days after sowing. Mix with irrigation water or apply on moist soil before rains come.",
   },
   {
-    question:
-      "What pest-control methods help reduce stem borers in turmeric organically?",
-    answer:
+    user: "What pest-control methods help reduce stem borers in turmeric organically?",
+    assistant:
       "Remove affected rhizomes and bury them. Use Trichoderma enriched biofertilizer around planting holes. Apply neem seed kernel powder at planting and send down soil.",
   },
   {
-    question:
-      "How can I reduce water use in paddy fields when irrigation is limited?",
-    answer:
+    user: "How can I reduce water use in paddy fields when irrigation is limited?",
+    assistant:
       "Use alternate wetting and drying (AWD): allow field to dry till cracks appear or water depth drops to 10 cm, then refill. This decreases water usage by up to 30% and improves root aeration.",
   },
   {
-    question:
-      "Which drought-tolerant vegetable varieties should I grow during summer?",
-    answer:
+    user: "Which drought-tolerant vegetable varieties should I grow during summer?",
+    assistant:
       "Choose okra, ridge gourd, sponge gourd, and snake gourd—they need less water and perform well under warm, dry conditions. Use mulching to preserve soil moisture.",
   },
   {
-    question:
-      "What steps help manage leaf spot disease in rubber nurseries naturally?",
-    answer:
+    user: "What steps help manage leaf spot disease in rubber nurseries naturally?",
+    assistant:
       "Remove and destroy diseased leaves. Spray 0.5% neem oil plus 0.1% soap solution weekly. Improve air circulation by thinning. Apply Trichoderma powder in nursery media.",
   },
   {
-    question:
-      "How can I improve soil pH in acidic vegetable gardens in Kerala’s highlands?",
-    answer:
+    user: "How can I improve soil pH in acidic vegetable gardens in Kerala’s highlands?",
+    assistant:
       "Mix finely powdered lime or dolomite at 500 kg/ha during dry season. Incorporate into soil. Retest after 6 months and repeat if pH is still under 5.5.",
   },
   {
-    question:
-      "How do I schedule sowing of green manures in fallow land before planting paddy?",
-    answer:
+    user: "How do I schedule sowing of green manures in fallow land before planting paddy?",
+    assistant:
       "During the end of monsoon (September–October), broadcast sunn hemp seeds at 20 kg/ha and allow them to grow for 40 days. Plough them in two weeks before planting paddy to enrich organic matter.",
   },
   {
-    question: "What natural methods help control mealybugs on areca nut palms?",
-    answer:
+    user: "What natural methods help control mealybugs on areca nut palms?",
+    assistant:
       "Spray a mixture of 5 kg lime, 5 kg ash, and 1 kg thiourea in 100 l water. Use horticultural soap. Encourage predator beetles by planting flowering border crops like marigold.",
   },
   {
-    question:
-      "How do I irrigate cassava during dry months without wasting water?",
-    answer:
+    user: "How do I irrigate cassava during dry months without wasting water?",
+    assistant:
       "Create basins around each plant. Apply 20 l water per plant once every 7–10 days, depending on weather. Mulch with dried leaves to conserve moisture and reduce frequency.",
   },
   {
-    question:
-      "How to select the right vegetable mix for intercropping with banana?",
-    answer:
+    user: "How to select the right vegetable mix for intercropping with banana?",
+    assistant:
       "Choose shade-tolerant crops like turmeric, ginger, or amaranth—plant in spaces between bunches. Ensure good drainage. Space at 30–40 cm. Apply compost and water lightly until established.",
   },
   {
-    question:
-      "What are the organic solutions for controlling bud rot in banana plants?",
-    answer:
+    user: "What are the organic solutions for controlling bud rot in banana plants?",
+    assistant:
       "Cut and destroy infected bunches and pseudostems. Improve drainage. Apply Trichoderma harzianum or neem cake (1 kg per plant) at monthly intervals. Avoid water logging.",
   },
   {
-    question:
-      "How can I improve nitrogen content in soil using homemade compost?",
-    answer:
+    user: "How can I improve nitrogen content in soil using homemade compost?",
+    assistant:
       "Include green vegetable kitchen waste, legume residues, and cow dung in compost pile. Turn it every 2 weeks to aerate. Compost well‑rotted before applying at 5 t/ha to fields.",
   },
   {
-    question:
-      "How do I plan irrigation during late monsoon for fodder production?",
-    answer:
+    user: "How do I plan irrigation during late monsoon for fodder production?",
+    assistant:
       "After rains, resume irrigation with 20 mm water weekly. Use furrow or channel methods. Monitor and adjust depending on rainfall received.",
   },
   {
-    question:
-      "What practices aid in controlling whitefly in vegetable gardens using eco‑friendly means?",
-    answer:
+    user: "What practices aid in controlling whitefly in vegetable gardens using eco‑friendly means?",
+    assistant:
       "Introduce yellow sticky traps near vulnerable crops. Spray water mixed with a drop of soap to knock off adults. Use neem oil spray (3%) every 7 days.",
   },
   {
-    question:
-      "Which soil amendment helps reduce soil compaction in rubber nurseries?",
-    answer:
+    user: "Which soil amendment helps reduce soil compaction in rubber nurseries?",
+    assistant:
       "Mix river sand or cocopeat (30%) with existing nursery soil. Integrate perlite or compost for better porosity and drainage, promoting root growth.",
   },
   {
-    question:
-      "How do I prepare for pest outbreaks after the first monsoon showers?",
-    answer:
+    user: "How do I prepare for pest outbreaks after the first monsoon showers?",
+    assistant:
       "Scout fields daily for increased pest activity. Deploy pheromone traps and yellow sticky cards. Maintain barrier crops like marigold. Spray neem seed decoctions preemptively when pests first appear.",
   },
   {
-    question: "How can I use banana pseudostem mulch in my field effectively?",
-    answer:
+    user: "How can I use banana pseudostem mulch in my field effectively?",
+    assistant:
       "Cut stable sections of pseudostem into strips. Lay them around plants as mulch—it retains moisture, suppresses weeds, and decomposes to enrich organic matter.",
   },
   {
-    question:
-      "What irrigation approach is best for betel vine cultivation in Vypeen?",
-    answer:
+    user: "What irrigation approach is best for betel vine cultivation in Vypeen?",
+    assistant:
       "Use basin irrigation with 10–15 l water per clump every 3–4 days. Include organic mulch around root zone. Use neem cake weekly at 100 g per plant during monsoon.",
   },
   {
-    question: "How do I assess soil fertility without lab facilities?",
-    answer:
+    user: "How do I assess soil fertility without lab facilities?",
+    assistant:
       "Use a DIY soil test: mix soil with vinegar—if it fizzes, it's alkaline; use citric acid: fast fizzing means alkaline soil. Incorporate compost regardless. Observe plant vigor and leaf color—yellow leaves suggest nitrogen deficiency.",
   },
   {
-    question:
-      "What are the steps to manage rodent damage in lowland farms near paddy fields?",
-    answer:
+    user: "What are the steps to manage rodent damage in lowland farms near paddy fields?",
+    assistant:
       "Remove weeds and field trash. Set up live-capture traps. Build bund walls around fields. Grow aromatic plants like lemongrass along borders to repel rodents naturally.",
   },
   {
-    question:
-      "Which legumes should I include in crop rotation to fix nitrogen for paddy?",
-    answer:
+    user: "Which legumes should I include in crop rotation to fix nitrogen for paddy?",
+    assistant:
       "Rotate paddy with cowpea, green gram, or mung bean during dry season. Incorporate the crop residues into soil after harvest to release nitrogen.",
   },
   {
-    question: "How to protect young coconut seedlings from drought stress?",
-    answer:
+    user: "How to protect young coconut seedlings from drought stress?",
+    assistant:
       "Water seedlings every other day at 2 l each until established. Apply coir pith mulch around the base. Add 20 g neem cake per seedling in every 3 weeks until rainy season.",
   },
   {
-    question: "What organic method controls thrips in onion beds?",
-    answer:
+    user: "What organic method controls thrips in onion beds?",
+    assistant:
       "Spray garlic–tamarind mixture (crush 10 garlic cloves + soak tamarind extract in 10 l water). Strain and apply weekly. Apply neem oil at 3 ml/l where needed. Keep beds weed-free and well aired.",
   },
   {
-    question: "How do I manage waterlogging in low-lying vegetable plots?",
-    answer:
+    user: "How do I manage waterlogging in low-lying vegetable plots?",
+    assistant:
       "Raise beds 20–25 cm above ground. Create shallow drains around beds. Apply gypsum (250 kg/ha) to improve infiltration. Mulch with coir pith to reduce pooling.",
   },
   {
-    question: "Which cash crops grow well under rubber canopy?",
-    answer:
+    user: "Which cash crops grow well under rubber canopy?",
+    assistant:
       "Under store rubber shade, plant medicinal ginger, turmeric, and ashwagandha. Provide light irrigation and mulch. Use vermicompost in each hole before planting.",
   },
   {
-    question:
-      "How can I forecast local rainfall to plan sowing and harvesting?",
-    answer:
+    user: "How can I forecast local rainfall to plan sowing and harvesting?",
+    assistant:
       "Use Kerala Agricultural University’s daily agromet advisories via SMS or mobile app. Observe morning dew and cloud patterns—thunder indicates likely afternoon rain, but clear sky suggests dryness.",
   },
   {
-    question:
-      "What are eco‑friendly methods to manage banana bunchy top virus?",
-    answer:
+    user: "What are eco‑friendly methods to manage banana bunchy top virus?",
+    assistant:
       "Use disease-free suckers for planting. Roguing infected plants immediately. Disinfect tools with 10% lime wash. Encourage natural aphid predators like ladybugs.",
   },
   {
-    question:
-      "How do I conduct efficient composting in warm humid conditions of Kerala?",
-    answer:
+    user: "How do I conduct efficient composting in warm humid conditions of Kerala?",
+    assistant:
       "Pile organic waste in shaded area. Keep moisture at 50–60%. Turn every 10 days. Use a mix of leafy greens and dry coconut waste to balance C:N ratio.",
   },
   {
-    question:
-      "How can I reduce post‑harvest losses of cassava in humid rural settings?",
-    answer:
+    user: "How can I reduce post‑harvest losses of cassava in humid rural settings?",
+    assistant:
       "Wash and sun-dry harvested roots for 1‑2 hours. Store in ventilated sheds on raised racks. Use clean, dry gunny bags instead of plastic.",
   },
   {
-    question: "What are the natural ways to control stem rot in ginger fields?",
-    answer:
+    user: "What are the natural ways to control stem rot in ginger fields?",
+    assistant:
       "Avoid waterlogging by planting on raised beds. Apply Trichoderma harzianum powder and neem cake at planting. Rotate with cereals to break disease cycle.",
   },
   {
-    question:
-      "How do I manage water scarcity during peak flowering of coconut palms?",
-    answer:
+    user: "How do I manage water scarcity during peak flowering of coconut palms?",
+    assistant:
       "Target basin irrigation with 20 l water per palm weekly. Apply mulches and 100 g neem cake to improve soil moisture retention and root health.",
   },
   {
-    question: "Which traditional indicators help predict rain onset in Kerala?",
-    answer:
+    user: "Which traditional indicators help predict rain onset in Kerala?",
+    assistant:
       "Observe local abiotic cues—early morning cool temperature, ant lines visible, ‘thick’ clouds from the west, and recurring ‘thunder sounds’ by 9 am typically signal rain within hours.",
   },
   {
-    question: "How can farmers reuse their organic crop residues effectively?",
-    answer:
+    user: "How can farmers reuse their organic crop residues effectively?",
+    assistant:
       "Chop residues like banana pseudostems and incorporate them into compost piles. Use as mulch around new plantings. They return nutrients slowly and improve moisture retention.",
   },
   {
-    question: "How do I manage stem rot in turmeric with indigenous methods?",
-    answer:
+    user: "How do I manage stem rot in turmeric with indigenous methods?",
+    assistant:
       "Ensure raised bed planting. Apply neem cake (1 t/ha) and Trichoderma powder at planting. Remove and bake infected rhizomes in the sun before discarding.",
   },
   {
-    question:
-      "What’s the best way to capture and use rainwater on small farms in Kerala?",
-    answer:
+    user: "What’s the best way to capture and use rainwater on small farms in Kerala?",
+    assistant:
       "Build a check dam or bund across minor drains. Divert rain runoff into farm ponds. Use collected water via buckets or gravity flow to irrigate gardens during dry spells.",
   },
   {
-    question:
-      "How can I check if my soil is too saline for planting vegetables?",
-    answer:
+    user: "How can I check if my soil is too saline for planting vegetables?",
+    assistant:
       "Take a pinch of soil, mix with water—if a white crust forms after drying, it indicates salinity. Leach with extra irrigation or apply gypsum to reduce salt concentration.",
   },
   {
-    question:
-      "How do I encourage beneficial insects in my mixed cropping system?",
-    answer:
+    user: "How do I encourage beneficial insects in my mixed cropping system?",
+    assistant:
       "Plant flower strips with marigold, cosmos, and coriander to attract predators. Avoid broad spectrum pesticides. Provide shade and small water sources like damp cloths to sustain beneficial insects.",
   },
   {
-    question:
-      "What measures can I take to reduce lodging in tall paddy varieties during wind storms?",
-    answer:
+    user: "What measures can I take to reduce lodging in tall paddy varieties during wind storms?",
+    assistant:
       "Fertilize using split nitrogen doses rather than full basal applications. Apply zinc and silica sprays. Plant at recommended spacing and maintain healthy root systems through continual soil moisture.",
   },
   {
-    question: "How can mulch help control weeds in pepper gardens?",
-    answer:
+    user: "How can mulch help control weeds in pepper gardens?",
+    assistant:
       "Apply 5–10 cm thick mulch of rice straw or coir pith between vines. It suppresses weeds, retains moisture, and gradually adds organic matter as it decomposes.",
-    },
-  {
-    "user": "How can I control the spread of leaf spot in my banana plantation during the monsoon?",
-    "assistant": "Remove and destroy infected leaves. Ensure proper drainage to avoid water stagnation. Spray a 1% Bordeaux mixture every 20 days during the rainy season."
   },
   {
-    "user": "What should I do to improve soil fertility in my rice field in Kuttanad?",
-    "assistant": "Apply farmyard manure at 5 tons/acre during field preparation. Use green manure like dhaincha before transplanting. Avoid overuse of chemical fertilizers."
+    user: "How can I control the spread of leaf spot in my banana plantation during the monsoon?",
+    assistant:
+      "Remove and destroy infected leaves. Ensure proper drainage to avoid water stagnation. Spray a 1% Bordeaux mixture every 20 days during the rainy season.",
   },
   {
-    "user": "My coconut palms are not producing nuts. What could be wrong?",
-    "assistant": "Check for adequate watering, especially during summer. Apply balanced nutrients—use 50 kg FYM, 500g urea, 800g super phosphate, and 1 kg muriate of potash per palm annually, split into two doses."
+    user: "What should I do to improve soil fertility in my rice field in Kuttanad?",
+    assistant:
+      "Apply farmyard manure at 5 tons/acre during field preparation. Use green manure like dhaincha before transplanting. Avoid overuse of chemical fertilizers.",
   },
   {
-    "user": "What is the best variety of banana for high yield in central Kerala?",
-    "assistant": "Nendran and Poovan are widely cultivated for both yield and market value. For shorter duration and better resistance, choose varieties like Grand Naine."
+    user: "My coconut palms are not producing nuts. What could be wrong?",
+    assistant:
+      "Check for adequate watering, especially during summer. Apply balanced nutrients—use 50 kg FYM, 500g urea, 800g super phosphate, and 1 kg muriate of potash per palm annually, split into two doses.",
   },
   {
-    "user": "How can I manage red palm weevil in my coconut farm?",
-    "assistant": "Regularly clean the crown area. Place pheromone traps to monitor adults. Apply neem oil emulsion or fill leaf axils with insecticidal mixture like chlorantraniliprole if infestation is found."
+    user: "What is the best variety of banana for high yield in central Kerala?",
+    assistant:
+      "Nendran and Poovan are widely cultivated for both yield and market value. For shorter duration and better resistance, choose varieties like Grand Naine.",
   },
   {
-    "user": "What is the ideal time to plant rice in Wayanad?",
-    "assistant": "June–July is best for the main kharif season. Use short-duration varieties if there’s a chance of late monsoon or early drought."
+    user: "How can I manage red palm weevil in my coconut farm?",
+    assistant:
+      "Regularly clean the crown area. Place pheromone traps to monitor adults. Apply neem oil emulsion or fill leaf axils with insecticidal mixture like chlorantraniliprole if infestation is found.",
   },
   {
-    "user": "How do I manage wilt disease in my vegetable garden organically?",
-    "assistant": "Use raised beds with good drainage. Apply Trichoderma viride with compost to the root zone. Rotate crops and avoid planting the same family of vegetables consecutively."
+    user: "What is the ideal time to plant rice in Wayanad?",
+    assistant:
+      "June–July is best for the main kharif season. Use short-duration varieties if there’s a chance of late monsoon or early drought.",
   },
   {
-    "user": "Which vegetables can I grow in the summer season in Kerala with limited water?",
-    "assistant": "Grow drought-tolerant vegetables like okra, cowpea, bitter gourd, and ash gourd. Use mulch and drip irrigation to conserve water."
+    user: "How do I manage wilt disease in my vegetable garden organically?",
+    assistant:
+      "Use raised beds with good drainage. Apply Trichoderma viride with compost to the root zone. Rotate crops and avoid planting the same family of vegetables consecutively.",
   },
   {
-    "user": "How often should I irrigate banana plants during summer?",
-    "assistant": "Irrigate once every 3–4 days with 20–30 liters per plant. Use basin irrigation or drip system and apply mulch to retain soil moisture."
+    user: "Which vegetables can I grow in the summer season in Kerala with limited water?",
+    assistant:
+      "Grow drought-tolerant vegetables like okra, cowpea, bitter gourd, and ash gourd. Use mulch and drip irrigation to conserve water.",
   },
   {
-    "user": "What organic fertilizers can I use to improve pepper yield?",
-    "assistant": "Apply compost, neem cake (1–2 kg per vine), and biofertilizers like Azospirillum and phosphate solubilizing bacteria. Mulch the base with dry leaves and irrigate during dry spells."
+    user: "How often should I irrigate banana plants during summer?",
+    assistant:
+      "Irrigate once every 3–4 days with 20–30 liters per plant. Use basin irrigation or drip system and apply mulch to retain soil moisture.",
   },
   {
-    "user": "My paddy plants are falling before maturity. What causes this?",
-    "assistant": "This could be due to lodging caused by overuse of nitrogen or wind. Use recommended fertilizer doses and choose shorter, sturdy varieties. Drain excess water during maturity."
+    user: "What organic fertilizers can I use to improve pepper yield?",
+    assistant:
+      "Apply compost, neem cake (1–2 kg per vine), and biofertilizers like Azospirillum and phosphate solubilizing bacteria. Mulch the base with dry leaves and irrigate during dry spells.",
   },
   {
-    "user": "How can I prevent bud rot in coconut during rainy season?",
-    "assistant": "Keep the crown area clean. Apply Bordeaux paste or copper oxychloride paste to the infected area. Ensure good drainage around the palm base."
+    user: "My paddy plants are falling before maturity. What causes this?",
+    assistant:
+      "This could be due to lodging caused by overuse of nitrogen or wind. Use recommended fertilizer doses and choose shorter, sturdy varieties. Drain excess water during maturity.",
   },
   {
-    "user": "What is the best method to control stem borers in rice?",
-    "assistant": "Use pheromone traps and light traps to monitor adult moths. Release egg parasitoids like Trichogramma. Avoid excessive nitrogen fertilizer."
+    user: "How can I prevent bud rot in coconut during rainy season?",
+    assistant:
+      "Keep the crown area clean. Apply Bordeaux paste or copper oxychloride paste to the infected area. Ensure good drainage around the palm base.",
   },
   {
-    "user": "My vegetable plants are turning yellow. What does this mean?",
-    "assistant": "Yellowing could be due to nitrogen deficiency or poor drainage. Apply well-rotted compost or urea and ensure proper water management."
+    user: "What is the best method to control stem borers in rice?",
+    assistant:
+      "Use pheromone traps and light traps to monitor adult moths. Release egg parasitoids like Trichogramma. Avoid excessive nitrogen fertilizer.",
   },
   {
-    "user": "How can I grow tapioca organically in Kerala?",
-    "assistant": "Plant disease-free stem cuttings during May–June. Apply farmyard manure (10 tons/ha), neem cake (500 kg/ha), and mulch with dry leaves. Use Trichoderma for disease control."
+    user: "My vegetable plants are turning yellow. What does this mean?",
+    assistant:
+      "Yellowing could be due to nitrogen deficiency or poor drainage. Apply well-rotted compost or urea and ensure proper water management.",
   },
   {
-    "user": "What is the best way to harvest and store rice to prevent spoilage?",
-    "assistant": "Harvest when grains are mature and hard. Dry the grains to 14% moisture and store in jute bags in a dry, airy location off the ground."
+    user: "How can I grow tapioca organically in Kerala?",
+    assistant:
+      "Plant disease-free stem cuttings during May–June. Apply farmyard manure (10 tons/ha), neem cake (500 kg/ha), and mulch with dry leaves. Use Trichoderma for disease control.",
   },
   {
-    "user": "Can I intercrop vegetables with banana in Kerala?",
-    "assistant": "Yes, grow shade-tolerant crops like ginger, turmeric, or colocasia. Ensure enough spacing and apply additional nutrients for both crops."
+    user: "What is the best way to harvest and store rice to prevent spoilage?",
+    assistant:
+      "Harvest when grains are mature and hard. Dry the grains to 14% moisture and store in jute bags in a dry, airy location off the ground.",
   },
   {
-    "user": "My coconut leaves are showing yellowing along the edges. What is the issue?",
-    "assistant": "It could be potassium deficiency. Apply muriate of potash (1 kg per palm/year) in two split doses along with irrigation."
+    user: "Can I intercrop vegetables with banana in Kerala?",
+    assistant:
+      "Yes, grow shade-tolerant crops like ginger, turmeric, or colocasia. Ensure enough spacing and apply additional nutrients for both crops.",
   },
   {
-    "user": "How can I control fruit fly in my bitter gourd crop?",
-    "assistant": "Use pheromone traps (methyl eugenol), cover fruits with bags, and spray neem seed kernel extract (5%) weekly."
+    user: "My coconut leaves are showing yellowing along the edges. What is the issue?",
+    assistant:
+      "It could be potassium deficiency. Apply muriate of potash (1 kg per palm/year) in two split doses along with irrigation.",
   },
   {
-    "user": "What is the best soil type for paddy cultivation?",
-    "assistant": "Clayey loam or alluvial soil with good water-holding capacity is ideal. Maintain pH between 5.5 and 6.5 for optimal growth."
+    user: "How can I control fruit fly in my bitter gourd crop?",
+    assistant:
+      "Use pheromone traps (methyl eugenol), cover fruits with bags, and spray neem seed kernel extract (5%) weekly.",
   },
   {
-    "user": "How do I prepare compost using farm waste?",
-    "assistant": "Layer green waste, dry leaves, and cow dung in a pit. Turn every 15 days. Compost will be ready in 2–3 months."
+    user: "What is the best soil type for paddy cultivation?",
+    assistant:
+      "Clayey loam or alluvial soil with good water-holding capacity is ideal. Maintain pH between 5.5 and 6.5 for optimal growth.",
   },
   {
-    "user": "How can I control aphids in my okra crop?",
-    "assistant": "Spray neem oil (5 ml/litre) or garlic-chili extract. Avoid overwatering and remove weeds regularly to reduce pest hiding spots."
+    user: "How do I prepare compost using farm waste?",
+    assistant:
+      "Layer green waste, dry leaves, and cow dung in a pit. Turn every 15 days. Compost will be ready in 2–3 months.",
   },
   {
-    "user": "What is the best method to irrigate paddy fields in water-scarce areas?",
-    "assistant": "Use alternate wetting and drying (AWD). Allow the field to dry for 2–3 days before next irrigation. This saves water and improves yield."
+    user: "How can I control aphids in my okra crop?",
+    assistant:
+      "Spray neem oil (5 ml/litre) or garlic-chili extract. Avoid overwatering and remove weeds regularly to reduce pest hiding spots.",
   },
   {
-    "user": "My banana plant has a bunch but no fruits are forming. What’s wrong?",
-    "assistant": "This may be due to poor pollination or nutrient deficiency. Apply a mixture of DAP and potash and maintain regular watering."
+    user: "What is the best method to irrigate paddy fields in water-scarce areas?",
+    assistant:
+      "Use alternate wetting and drying (AWD). Allow the field to dry for 2–3 days before next irrigation. This saves water and improves yield.",
   },
   {
-    "user": "Can I use green manure before planting vegetables?",
-    "assistant": "Yes. Grow sunhemp or cowpea, plough it in before flowering (around 40 days). Wait 2 weeks before planting vegetables."
+    user: "My banana plant has a bunch but no fruits are forming. What’s wrong?",
+    assistant:
+      "This may be due to poor pollination or nutrient deficiency. Apply a mixture of DAP and potash and maintain regular watering.",
   },
   {
-    "user": "What are common pests in tapioca and how to control them?",
-    "assistant": "Mealybugs and red spider mites are common. Use neem oil spray (5%) and apply ash on leaf undersides to reduce mite infestation."
+    user: "Can I use green manure before planting vegetables?",
+    assistant:
+      "Yes. Grow sunhemp or cowpea, plough it in before flowering (around 40 days). Wait 2 weeks before planting vegetables.",
   },
   {
-    "user": "How can I prevent fungal disease in brinjal during monsoon?",
-    "assistant": "Ensure proper spacing and drainage. Apply Trichoderma mixed with compost at planting. Avoid overhead watering."
+    user: "What are common pests in tapioca and how to control them?",
+    assistant:
+      "Mealybugs and red spider mites are common. Use neem oil spray (5%) and apply ash on leaf undersides to reduce mite infestation.",
   },
   {
-    "user": "When should I apply lime to my acidic vegetable field?",
-    "assistant": "Apply lime during the dry season, 1 month before sowing. Mix well into the topsoil and irrigate lightly after application."
+    user: "How can I prevent fungal disease in brinjal during monsoon?",
+    assistant:
+      "Ensure proper spacing and drainage. Apply Trichoderma mixed with compost at planting. Avoid overhead watering.",
   },
   {
-    "user": "Is mulching beneficial in Kerala's vegetable farms?",
-    "assistant": "Yes. Mulching with dry leaves or straw helps retain soil moisture, suppress weeds, and reduce temperature fluctuations."
+    user: "When should I apply lime to my acidic vegetable field?",
+    assistant:
+      "Apply lime during the dry season, 1 month before sowing. Mix well into the topsoil and irrigate lightly after application.",
   },
   {
-    "user": "My rice field has patches with stunted growth. What is the reason?",
-    "assistant": "It could be zinc deficiency. Apply zinc sulfate at 25 kg/ha. Ensure uniform leveling and avoid water stagnation."
+    user: "Is mulching beneficial in Kerala's vegetable farms?",
+    assistant:
+      "Yes. Mulching with dry leaves or straw helps retain soil moisture, suppress weeds, and reduce temperature fluctuations.",
   },
   {
-    "user": "How do I manage water logging in vegetable gardens during monsoon?",
-    "assistant": "Plant on raised beds, provide side drains, and cover soil with mulch. Avoid heavy irrigation during rainy spells."
+    user: "My rice field has patches with stunted growth. What is the reason?",
+    assistant:
+      "It could be zinc deficiency. Apply zinc sulfate at 25 kg/ha. Ensure uniform leveling and avoid water stagnation.",
   },
   {
-    "user": "How can I store harvested coconuts safely during rainy season?",
-    "assistant": "Store in a dry, well-ventilated shed. Keep coconuts on a raised bamboo platform or wooden rack to avoid ground moisture."
+    user: "How do I manage water logging in vegetable gardens during monsoon?",
+    assistant:
+      "Plant on raised beds, provide side drains, and cover soil with mulch. Avoid heavy irrigation during rainy spells.",
   },
   {
-    "user": "What spacing is ideal for planting okra in Kerala?",
-    "assistant": "Maintain spacing of 30 cm between plants and 45 cm between rows for good air circulation and sunlight."
+    user: "How can I store harvested coconuts safely during rainy season?",
+    assistant:
+      "Store in a dry, well-ventilated shed. Keep coconuts on a raised bamboo platform or wooden rack to avoid ground moisture.",
   },
   {
-    "user": "How do I manage rat infestation in my paddy fields?",
-    "assistant": "Use bait traps with rice mixed with zinc phosphide. Keep bunds clean and plug rat holes regularly."
+    user: "What spacing is ideal for planting okra in Kerala?",
+    assistant:
+      "Maintain spacing of 30 cm between plants and 45 cm between rows for good air circulation and sunlight.",
   },
   {
-    "user": "Can I grow vegetables in old rubber plantations?",
-    "assistant": "Yes, shade-tolerant crops like ginger, turmeric, and colocasia can be grown. Apply organic manure and ensure irrigation."
+    user: "How do I manage rat infestation in my paddy fields?",
+    assistant:
+      "Use bait traps with rice mixed with zinc phosphide. Keep bunds clean and plug rat holes regularly.",
   },
   {
-    "user": "What is the best fertilizer schedule for Nendran banana?",
-    "assistant": "Apply 10 kg FYM, 200 g N, 100 g P, and 300 g K per plant in 3 split doses—after planting, at 3rd month, and 5th month."
+    user: "Can I grow vegetables in old rubber plantations?",
+    assistant:
+      "Yes, shade-tolerant crops like ginger, turmeric, and colocasia can be grown. Apply organic manure and ensure irrigation.",
   },
   {
-    "user": "How do I improve soil structure in sandy soil areas?",
-    "assistant": "Add compost, cow dung, and green manure crops. Incorporate coir pith and biochar to retain moisture and nutrients."
+    user: "What is the best fertilizer schedule for Nendran banana?",
+    assistant:
+      "Apply 10 kg FYM, 200 g N, 100 g P, and 300 g K per plant in 3 split doses—after planting, at 3rd month, and 5th month.",
   },
   {
-    "user": "What is the best time for transplanting rice seedlings in lowland Kerala?",
-    "assistant": "Transplant 20–25 day old seedlings during early monsoon (June–July). Maintain proper water depth (2–3 cm) initially."
+    user: "How do I improve soil structure in sandy soil areas?",
+    assistant:
+      "Add compost, cow dung, and green manure crops. Incorporate coir pith and biochar to retain moisture and nutrients.",
   },
   {
-    "user": "Can I grow ginger organically in Kerala?",
-    "assistant": "Yes. Use disease-free seed rhizomes. Apply compost, neem cake, and Trichoderma. Mulch heavily and irrigate moderately."
+    user: "What is the best time for transplanting rice seedlings in lowland Kerala?",
+    assistant:
+      "Transplant 20–25 day old seedlings during early monsoon (June–July). Maintain proper water depth (2–3 cm) initially.",
   },
   {
-    "user": "How do I control shoot borer in brinjal?",
-    "assistant": "Remove and destroy infested shoots. Spray neem oil or Bacillus thuringiensis (Bt) weekly during the flowering stage."
+    user: "Can I grow ginger organically in Kerala?",
+    assistant:
+      "Yes. Use disease-free seed rhizomes. Apply compost, neem cake, and Trichoderma. Mulch heavily and irrigate moderately.",
   },
   {
-    "user": "How can I protect young banana plants from wind damage?",
-    "assistant": "Support the plant with bamboo stakes. Plant windbreak trees on borders. Avoid overcrowding and ensure strong root anchoring."
-  }
-
-
+    user: "How do I control shoot borer in brinjal?",
+    assistant:
+      "Remove and destroy infested shoots. Spray neem oil or Bacillus thuringiensis (Bt) weekly during the flowering stage.",
+  },
+  {
+    user: "How can I protect young banana plants from wind damage?",
+    assistant:
+      "Support the plant with bamboo stakes. Plant windbreak trees on borders. Avoid overcrowding and ensure strong root anchoring.",
+  },
 ];

@@ -1,6 +1,7 @@
 import { injectable } from "tsyringe";
 import { prisma } from "../infra/prismaClient";
 import { Farmer } from "../domain/farmer";
+import { IFarmerRepository } from "./interface";
 
 interface GetPaginatedOptions {
   page: number;
@@ -15,7 +16,7 @@ interface GetPaginatedOptions {
 }
 
 @injectable()
-export class FarmerRepository {
+export class FarmerRepository implements IFarmerRepository {
   async create(
     farmer: Omit<Farmer, "id" | "createdAt" | "updatedAt">
   ): Promise<Farmer> {
@@ -24,7 +25,7 @@ export class FarmerRepository {
     });
   }
 
-  async getById(farmerId: string): Promise<Farmer | null> {
+  async findByFarmerId(farmerId: string): Promise<Farmer | null> {
     return prisma.farmer.findUnique({
       where: { farmerId },
     });
@@ -46,7 +47,7 @@ export class FarmerRepository {
     });
   }
 
-  async getAll(): Promise<Farmer[]> {
+  async findAll(): Promise<Farmer[]> {
     return prisma.farmer.findMany({
       orderBy: { createdAt: "desc" },
     });

@@ -3,6 +3,7 @@ import { FarmerRepository } from "../repositories/farmer.repository";
 import { Farmer } from "../domain/farmer";
 import { AppError } from "../middlewares/errorHandler";
 import { IFarmerService } from "./interface";
+import { generateFarmerId } from "@/utils/farmerIdGenerator";
 
 interface GetAllOptions {
   page: number;
@@ -27,7 +28,6 @@ export class FarmerService implements IFarmerService {
     farmer: Omit<Farmer, "id" | "createdAt" | "updatedAt">
   ): Promise<Farmer> {
     try {
-      // Check if farmer already exists
       const existing = await this.repo.findByFarmerId(farmer.farmerId);
       if (existing) {
         throw new AppError(
@@ -35,8 +35,9 @@ export class FarmerService implements IFarmerService {
           `Farmer with ID ${farmer.farmerId} already exists`
         );
       }
+      const farmerId = await generateFarmerId(); // ← Use the utility function
 
-      return await this.repo.create(farmer);
+      return await this.repo.create({ ...farmer, farmerId });
     } catch (error) {
       if (error instanceof AppError) {
         throw error;

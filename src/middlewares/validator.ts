@@ -53,10 +53,6 @@ export const validateParams = (schema: z.ZodSchema) => {
 
 // Request body schemas
 export const farmerSchema = z.object({
-  farmerId: z
-    .string()
-    .min(1, "Farmer ID is required")
-    .max(50, "Farmer ID too long"),
   name: z.string().min(1, "Name is required").max(100, "Name too long"),
   phone: z
     .string()
